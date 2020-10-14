@@ -420,6 +420,7 @@ namespace Icebreaker
             this.Randomize(users);
 
             LinkedList<ChannelAccount> queue = new LinkedList<ChannelAccount>(users);
+            this.telemetryClient.TrackTrace($"Queue: {queue.Count}");
 
             var pairs = new List<Tuple<ChannelAccount, ChannelAccount>>();
             for (int i = 0; i < users.Count - 1; i += 2)
@@ -443,7 +444,7 @@ namespace Icebreaker
                         pairUserTwo = restOfQueue.Value;
                         UserInfo pairUserOneInfo = this.dataProvider.GetUserInfoAsync(pairUserOne.AsTeamsChannelAccount().ObjectId)?.Result;
                         UserInfo pairUserTwoInfo = this.dataProvider.GetUserInfoAsync(pairUserTwo.AsTeamsChannelAccount().ObjectId)?.Result;
-
+                        this.telemetryClient.TrackTrace($"{pairUserOneInfo}:{pairUserTwoInfo}");
                         // if no recent pairups, create this list
                         if (pairUserOneInfo?.RecentPairUps == null)
                         {
@@ -456,6 +457,7 @@ namespace Icebreaker
                         }
 
                         // check if userone and usertwo have already paired recently
+                        this.telemetryClient.TrackTrace($"Checking if same pair created recently");
                         if (this.SamePairNotCreatedRecently(pairUserOneInfo, pairUserTwoInfo))
                         {
                             pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(pairUserOne, pairUserTwo));
@@ -469,13 +471,14 @@ namespace Icebreaker
                     }
 
                     // Not possible to find a perfect pairing, so just use next.
+                    this.telemetryClient.TrackTrace($"Using next");
                     if (!foundPerfectPairing)
                     {
                         pairUserTwo = queue.First.Value;
                         pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(pairUserOne, pairUserTwo));
                         queue.RemoveFirst();
                     }
-                    this.telemetryClient.TrackTrace($"Pairing {pairUserOne} and {pairUserTwo}");
+                    //this.telemetryClient.TrackTrace($"Pairing {pairUserOne} and {pairUserTwo}");
                 }
             }
             return pairs;

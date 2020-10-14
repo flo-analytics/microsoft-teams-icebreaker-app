@@ -444,7 +444,7 @@ namespace Icebreaker
                         pairUserTwo = restOfQueue.Value;
                         UserInfo pairUserOneInfo = this.dataProvider.GetUserInfoAsync(pairUserOne.AsTeamsChannelAccount().ObjectId)?.Result;
                         UserInfo pairUserTwoInfo = this.dataProvider.GetUserInfoAsync(pairUserTwo.AsTeamsChannelAccount().ObjectId)?.Result;
-                        this.telemetryClient.TrackTrace($"{pairUserOneInfo}:{pairUserTwoInfo}");
+                        this.telemetryClient.TrackTrace($"create if no recent pairups");
                         // if no recent pairups, create this list
                         if (pairUserOneInfo?.RecentPairUps == null)
                         {
@@ -478,7 +478,7 @@ namespace Icebreaker
                         pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(pairUserOne, pairUserTwo));
                         queue.RemoveFirst();
                     }
-                    //this.telemetryClient.TrackTrace($"Pairing {pairUserOne} and {pairUserTwo}");
+                    this.telemetryClient.TrackTrace($"Pairing completed");
                 }
             }
             return pairs;
@@ -516,6 +516,7 @@ namespace Icebreaker
         /// <returns>True if users were NOT paired recently</returns>
         private bool SamePairNotCreatedRecently(UserInfo userOneInfo, UserInfo userTwoInfo)
         {
+            this.telemetryClient.TrackTrace($" do SamePairNotCreatedRecently");
             if (userOneInfo == null || userTwoInfo == null)
             {
                 return false;

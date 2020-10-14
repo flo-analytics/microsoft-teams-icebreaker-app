@@ -418,7 +418,6 @@ namespace Icebreaker
             var pairs = new List<Tuple<ChannelAccount, ChannelAccount>>();
             for (int i = 0; i < users.Count - 1; i += 2)
             {
-                this.telemetryClient.TrackTrace($"Pairing {users[i]} and {users[i + 1]}");
                 pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(users[i], users[i + 1]));
             }
 

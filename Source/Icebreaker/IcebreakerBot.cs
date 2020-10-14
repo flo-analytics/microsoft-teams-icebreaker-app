@@ -423,16 +423,17 @@ namespace Icebreaker
             this.telemetryClient.TrackTrace($"Queue: {queue.Count}");
 
             var pairs = new List<Tuple<ChannelAccount, ChannelAccount>>();
-            for (int i = 0; i < users.Count - 1; i += 2)
-            {
+            //for (int i = 0; i < users.Count - 1; i += 2)
+            //{
                 /// The idea of the following matching algorithm is as follows:
                 /// Pick first user X from queue.
                 /// Find in FIFO manner from the rest of the queue the first user Y such that X and Y have not been "recently paired".
                 /// If no such perfect pairing is possible, match with next user in queue.
                 while (queue.Count > 0)
                 {
-                    pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(users[i], users[i + 1]));
-                
+                    //this.telemetryClient.TrackTrace($" user {i} and {i+1}");
+                    //pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(users[i], users[i + 1]));
+                    //this.telemetryClient.TrackTrace($"Value {queue.First.Value}");
                     ChannelAccount pairUserOne = queue.First.Value;
                     ChannelAccount pairUserTwo = null;
                     queue.RemoveFirst();
@@ -480,7 +481,7 @@ namespace Icebreaker
                     }
                     this.telemetryClient.TrackTrace($"Pairing completed");
                 }
-            }
+            //}
             return pairs;
         }
 

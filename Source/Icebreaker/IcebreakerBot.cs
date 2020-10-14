@@ -442,6 +442,7 @@ namespace Icebreaker
 
                     for (LinkedListNode<ChannelAccount> restOfQueue = queue.First; restOfQueue != null; restOfQueue = restOfQueue.Next)
                     {
+                        this.telemetryClient.TrackTrace($"getting restOfQueue.Value");
                         pairUserTwo = restOfQueue.Value;
                         UserInfo pairUserOneInfo = this.dataProvider.GetUserInfoAsync(pairUserOne.AsTeamsChannelAccount().ObjectId)?.Result;
                         UserInfo pairUserTwoInfo = this.dataProvider.GetUserInfoAsync(pairUserTwo.AsTeamsChannelAccount().ObjectId)?.Result;
@@ -449,11 +450,13 @@ namespace Icebreaker
                         // if no recent pairups, create this list
                         if (pairUserOneInfo?.RecentPairUps == null)
                         {
+                            this.telemetryClient.TrackTrace($"pairUserOneInfo");
                             pairUserOneInfo.RecentPairUps = new List<UserInfo>();
                         }
 
                         if (pairUserTwoInfo?.RecentPairUps == null)
                         {
+                            this.telemetryClient.TrackTrace($"pairUserTwoInfo");
                             pairUserTwoInfo.RecentPairUps = new List<UserInfo>();
                         }
 

@@ -157,32 +157,7 @@ namespace Icebreaker.Helpers
             };
             await this.documentClient.UpsertDocumentAsync(this.usersCollection.SelfLink, userInfo);
         }
-        
-        /// <summary>
-        /// Set the user info for the given user
-        /// overloaded version with recent pairups.
-        /// </summary>
-        /// <param name="tenantId">Tenant id</param>
-        /// <param name="userId">User id</param>
-        /// <param name="optedIn">User opt-in status</param>
-        /// <param name="serviceUrl">User service URL</param>
-        /// <param name="recentPairUps">User recent pairs</param>
-        /// <returns>Tracking task</returns>
-        public async Task SetUserInfoAsync(string tenantId, string userId, bool optedIn, string serviceUrl, List<UserInfo> recentPairUps = null)
-        {
-            await this.EnsureInitializedAsync();
 
-            var userInfo = new UserInfo
-            {
-                TenantId = tenantId,
-                UserId = userId,
-                OptedIn = optedIn,
-                ServiceUrl = serviceUrl,
-                RecentPairUps = recentPairUps ?? new List<UserInfo>() /// set or empty the RecentPairUps depending if param passed
-            };
-            await this.documentClient.UpsertDocumentAsync(this.usersCollection.SelfLink, userInfo);
-        }
-        
         /// <summary>
         /// Initializes the database connection.
         /// </summary>

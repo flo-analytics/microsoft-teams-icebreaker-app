@@ -81,7 +81,7 @@ namespace Icebreaker
                         { "UserAadId", senderAadId },
                         { "OptInStatus", "false" },
                     };
-                    this.telemetryClient.TrackEvent("UserOptInStatusSet", properties);    
+                    this.telemetryClient.TrackEvent("UserOptInStausSet", properties);
 
                     await this.bot.OptOutUser(tenantId, senderAadId, activity.ServiceUrl);
 

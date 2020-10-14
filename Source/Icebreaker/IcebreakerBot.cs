@@ -420,20 +420,18 @@ namespace Icebreaker
             this.Randomize(users);
 
             LinkedList<ChannelAccount> queue = new LinkedList<ChannelAccount>(users);
-            this.telemetryClient.TrackTrace($"Queue: {queue.Count}");
 
             var pairs = new List<Tuple<ChannelAccount, ChannelAccount>>();
-            //for (int i = 0; i < users.Count - 1; i += 2)
-            //{
+            for (int i = 0; i < users.Count - 1; i += 2)
+            {
                 /// The idea of the following matching algorithm is as follows:
                 /// Pick first user X from queue.
                 /// Find in FIFO manner from the rest of the queue the first user Y such that X and Y have not been "recently paired".
                 /// If no such perfect pairing is possible, match with next user in queue.
                 while (queue.Count > 0)
                 {
-                    //this.telemetryClient.TrackTrace($" user {i} and {i+1}");
-                    //pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(users[i], users[i + 1]));
-                    //this.telemetryClient.TrackTrace($"Value {queue.First.Value}");
+                    pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(users[i], users[i + 1]));
+                
                     ChannelAccount pairUserOne = queue.First.Value;
                     ChannelAccount pairUserTwo = null;
                     queue.RemoveFirst();
@@ -442,26 +440,22 @@ namespace Icebreaker
 
                     for (LinkedListNode<ChannelAccount> restOfQueue = queue.First; restOfQueue != null; restOfQueue = restOfQueue.Next)
                     {
-                        this.telemetryClient.TrackTrace($"getting restOfQueue.Value");
                         pairUserTwo = restOfQueue.Value;
                         UserInfo pairUserOneInfo = this.dataProvider.GetUserInfoAsync(pairUserOne.AsTeamsChannelAccount().ObjectId)?.Result;
                         UserInfo pairUserTwoInfo = this.dataProvider.GetUserInfoAsync(pairUserTwo.AsTeamsChannelAccount().ObjectId)?.Result;
-                        this.telemetryClient.TrackTrace($"create if no recent pairups");
+
                         // if no recent pairups, create this list
                         if (pairUserOneInfo?.RecentPairUps == null)
                         {
-                            this.telemetryClient.TrackTrace($"pairUserOneInfo");
                             pairUserOneInfo.RecentPairUps = new List<UserInfo>();
                         }
 
                         if (pairUserTwoInfo?.RecentPairUps == null)
                         {
-                            this.telemetryClient.TrackTrace($"pairUserTwoInfo");
                             pairUserTwoInfo.RecentPairUps = new List<UserInfo>();
                         }
 
                         // check if userone and usertwo have already paired recently
-                        this.telemetryClient.TrackTrace($"Checking if same pair created recently");
                         if (this.SamePairNotCreatedRecently(pairUserOneInfo, pairUserTwoInfo))
                         {
                             pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(pairUserOne, pairUserTwo));
@@ -475,16 +469,15 @@ namespace Icebreaker
                     }
 
                     // Not possible to find a perfect pairing, so just use next.
-                    this.telemetryClient.TrackTrace($"Using next");
                     if (!foundPerfectPairing)
                     {
                         pairUserTwo = queue.First.Value;
                         pairs.Add(new Tuple<ChannelAccount, ChannelAccount>(pairUserOne, pairUserTwo));
                         queue.RemoveFirst();
                     }
-                    this.telemetryClient.TrackTrace($"Pairing completed");
+                    this.telemetryClient.TrackTrace($"Pairing {pairUserOne} and {pairUserTwo}");
                 }
-            //}
+            }
             return pairs;
         }
 
@@ -520,7 +513,6 @@ namespace Icebreaker
         /// <returns>True if users were NOT paired recently</returns>
         private bool SamePairNotCreatedRecently(UserInfo userOneInfo, UserInfo userTwoInfo)
         {
-            this.telemetryClient.TrackTrace($" do SamePairNotCreatedRecently");
             if (userOneInfo == null || userTwoInfo == null)
             {
                 return false;

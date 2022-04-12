@@ -8,7 +8,8 @@
           "type": "TextBlock",
           "size": "Medium",
           "weight": "Bolder",
-          "text": "%salutationText%"
+          "text": "${salutationText}",
+          "horizontalAlignment": "${textAlignment}"
         }
       ]
     },
@@ -18,26 +19,29 @@
         {
           "type": "Image",
           "horizontalAlignment": "Center",
-          "url": "%welcomeCardImageUrl%",
+          "url": "${welcomeCardImageUrl}",
           "width": "424px",
           "height": "248px"
         },
         {
           "type": "TextBlock",
-          "text": "%teamIntroPart1%",
-          "wrap": true
+          "text": "${teamIntroPart1}",
+          "wrap": true,
+          "horizontalAlignment": "${textAlignment}"
         },
         {
           "type": "TextBlock",
-          "text": "%teamIntroPart2%",
+          "text": "${teamIntroPart2}",
           "wrap": true,
-          "spacing": "Medium"
+          "spacing": "Medium",
+          "horizontalAlignment": "${textAlignment}"
         },
         {
           "type": "TextBlock",
-          "text": "%teamIntroPart3%",
+          "text": "${teamIntroPart3}",
           "wrap": true,
-          "spacing": "Medium"
+          "spacing": "Medium",
+          "horizontalAlignment": "${textAlignment}"
         }
       ]
     }
@@ -45,8 +49,8 @@
   "actions": [
     {
       "type": "Action.OpenUrl",
-      "title": "%tourButtonText%",
-      "url": "%tourUrl%"
+      "title": "${tourButtonText}",
+      "url": "${tourUrl}"
     }
   ],
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",

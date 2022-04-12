@@ -8,7 +8,8 @@
           "type": "TextBlock",
           "size": "Medium",
           "weight": "Bolder",
-          "text": "%salutationText%"
+          "text": "${salutationText}",
+          "horizontalAlignment": "${textAlignment}"
         }
       ]
     },
@@ -18,26 +19,29 @@
         {
           "type": "Image",
           "horizontalAlignment": "Center",
-          "url": "%welcomeCardImageUrl%",
+          "url": "${welcomeCardImageUrl}",
           "width": "424px",
           "height": "248px"
         },
         {
           "type": "TextBlock",
-          "text": "%introMessagePart1%",
-          "wrap": true
-        },
-        {
-          "type": "TextBlock",
-          "text": "%introMessagePart2%",
+          "text": "${introMessagePart1}",
           "wrap": true,
-          "spacing": "Medium"
+          "horizontalAlignment": "${textAlignment}"
         },
         {
           "type": "TextBlock",
-          "text": "%introMessagePart3%",
-          "wrap": true, 
-          "spacing": "Medium"
+          "text": "${introMessagePart2}",
+          "wrap": true,
+          "spacing": "Medium",
+          "horizontalAlignment": "${textAlignment}"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${introMessagePart3}",
+          "wrap": true,
+          "spacing": "Medium",
+          "horizontalAlignment": "${textAlignment}"
         }
       ]
     }
@@ -45,16 +49,16 @@
   "actions": [
     {
       "type": "Action.OpenUrl",
-      "title": "%tourButtonText%",
-      "url": "%tourUrl%"
+      "title": "${tourButtonText}",
+      "url": "${tourUrl}"
     },
     {
       "type": "Action.Submit",
-      "title": "%pauseMatchesText%",
+      "title": "${pauseMatchesText}",
       "data": {
         "msteams": {
           "type": "messageBack",
-          "displayText": "%pauseMatchesText%",
+          "displayText": "${pauseMatchesText}",
           "text": "optout"
         }
       }

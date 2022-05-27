@@ -8,8 +8,7 @@
           "type": "TextBlock",
           "size": "Medium",
           "weight": "Bolder",
-          "text": "${salutationText}",
-          "horizontalAlignment": "${textAlignment}"
+          "text": "${salutationText}"
         }
       ]
     },
@@ -26,22 +25,19 @@
         {
           "type": "TextBlock",
           "text": "${introMessagePart1}",
-          "wrap": true,
-          "horizontalAlignment": "${textAlignment}"
+          "wrap": true
         },
         {
           "type": "TextBlock",
           "text": "${introMessagePart2}",
           "wrap": true,
-          "spacing": "Medium",
-          "horizontalAlignment": "${textAlignment}"
+          "spacing": "Medium"
         },
         {
           "type": "TextBlock",
           "text": "${introMessagePart3}",
-          "wrap": true,
-          "spacing": "Medium",
-          "horizontalAlignment": "${textAlignment}"
+          "wrap": true, 
+          "spacing": "Medium"
         }
       ]
     }

@@ -8,8 +8,7 @@
           "type": "TextBlock",
           "size": "Medium",
           "weight": "Bolder",
-          "text": "${salutationText}",
-          "horizontalAlignment": "${textAlignment}"
+          "text": "${salutationText}"
         }
       ]
     },
@@ -26,22 +25,19 @@
         {
           "type": "TextBlock",
           "text": "${teamIntroPart1}",
-          "wrap": true,
-          "horizontalAlignment": "${textAlignment}"
+          "wrap": true
         },
         {
-          "type": "TextBlock",
-          "text": "${teamIntroPart2}",
-          "wrap": true,
-          "spacing": "Medium",
-          "horizontalAlignment": "${textAlignment}"
+            "type": "TextBlock",
+            "text": "${teamIntroPart2}",
+            "wrap": true,
+            "spacing": "Medium"
         },
         {
           "type": "TextBlock",
           "text": "${teamIntroPart3}",
           "wrap": true,
-          "spacing": "Medium",
-          "horizontalAlignment": "${textAlignment}"
+          "spacing": "Medium"
         }
       ]
     }

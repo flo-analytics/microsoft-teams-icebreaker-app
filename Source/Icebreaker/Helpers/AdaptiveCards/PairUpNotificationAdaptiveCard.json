@@ -10,8 +10,7 @@
           "weight": "Bolder",
           "text": "${matchUpCardTitleContent}",
           "wrap": true,
-          "maxLines": 2,
-          "horizontalAlignment": "${textAlignment}"
+          "maxLines": 2
         }
       ]
     },
@@ -24,8 +23,7 @@
             {
               "type": "TextBlock",
               "text": "${matchUpCardMatchedText}",
-              "wrap": true,
-              "horizontalAlignment": "${textAlignment}"
+              "wrap": true
             }
           ]
         },
@@ -35,16 +33,14 @@
             {
               "type": "TextBlock",
               "text": "${matchUpCardContentPart1}",
-              "wrap": true,
-              "horizontalAlignment": "${textAlignment}"
+              "wrap": true
             }
           ]
         },
         {
           "type": "TextBlock",
           "text": "${matchUpCardContentPart2}",
-          "wrap": true,
-          "horizontalAlignment": "${textAlignment}"
+          "wrap": true
         }
       ]
     }

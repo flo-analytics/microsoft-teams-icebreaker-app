@@ -126,7 +126,7 @@
     <comment>Button text to initiate a chat with the person the user has been matched up with</comment>
   </data>
   <data name="ChatWithMessageGreeting" xml:space="preserve">
-    <value>Hi there</value>
+    <value>Hi%20there%20</value>
     <comment>This is the greeting of the chat with matched member message</comment>
   </data>
   <data name="DoneButtonText" xml:space="preserve">
